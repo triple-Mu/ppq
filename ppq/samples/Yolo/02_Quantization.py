@@ -41,10 +41,6 @@ with ENABLE_CUDA_KERNEL():
         graph=qir, running_device=EXECUTING_DEVICE, 
         dataloader=dataloader, collate_fn=lambda x: x.to(EXECUTING_DEVICE))
 
-    snr_report = layerwise_error_analyse(
-        graph=qir, running_device=EXECUTING_DEVICE, 
-        dataloader=dataloader, collate_fn=lambda x: x.to(EXECUTING_DEVICE))
-
     export_ppq_graph(
         qir, platform=TargetPlatform.TRT_INT8, 
         graph_save_to=ENGINE_PATH, 
